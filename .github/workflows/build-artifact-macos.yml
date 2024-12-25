@@ -64,8 +64,6 @@ jobs:
       # Download GodotSteam Multiplayer Peer
       - name: Download GodotSteam Multiplayer Peer
         uses: ./.github/actions/download-godotsteam-multiplayer
-        with:
-          path: "godotsteammultiplayer"
 
       # Download and install Vulkan
       - name: Download Vulkan SDK

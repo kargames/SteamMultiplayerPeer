@@ -87,8 +87,6 @@ jobs:
       # Download GodotSteam Multiplayer Peer
       - name: Download GodotSteam Multiplayer Peer
         uses: ./.github/actions/download-godotsteam-multiplayer
-        with:
-          path: "godotsteammultiplayer"
 
       # Get that cache money
       - name: Setup Build Cache

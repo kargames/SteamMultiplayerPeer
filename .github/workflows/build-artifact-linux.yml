@@ -61,8 +61,6 @@ jobs:
       # Download GodotSteam Multiplayer Peer
       - name: Download GodotSteam Multiplayer Peer
         uses: ./.github/actions/download-godotsteam-multiplayer
-        with:
-          path: "godotsteammultiplayer"
 
       # Setting up the Linux buildroot for older versions
       - name: Setup Linux Buildroot (x64_64)
