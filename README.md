@@ -1,16 +1,14 @@
-# GodotSteam MultiplayerPeer
-An ecosystem of tools for Godot Engine (version 4.x) and Steam. MultiplayerPeer bridges Godot's multiplayer nodes with Steam networking. For the Windows, Linux, and Mac platforms.
-
+# GodotSteam MultiplayerPeer for Godot Engine 4.x | Community Edition
+An ecosystem of tools for [Godot Engine](https://godotengine.org) and [Valve's Steam](https://store.steampowered.com). MultiplayerPeer bridges Godot's multiplayer nodes with Steam networking. For the Windows, Linux, and Mac platforms.
 
 Additional Flavors
 ---
-Pre-Compiles | Plug-ins | Server | Examples/Demos
+Pre-Compiles | Plug-ins | Server | Examples
 --- | --- | --- | ---
-[Godot 2.x](https://github.com/GodotSteam/GodotSteam/tree/godot2)| [GDNative](https://github.com/GodotSteam/GodotSteam/tree/gdnative) | [Server 3.x](https://github.com/GodotSteam/GodotSteam-Server/tree/godot3) | [Godot 3.x](https://github.com/GodotSteam/GodotSteam-Example-Project/tree/godot3)
-[Godot 3.x](https://github.com/GodotSteam/GodotSteam/tree/godot3) | [GDExtension](https://github.com/GodotSteam/GodotSteam/tree/gdextension) | [Server 4.x](https://github.com/GodotSteam/GodotSteam-Server/tree/godot4) |  [Godot 4.x](https://github.com/GodotSteam/GodotSteam-Example-Project/tree/godot4)
-[Godot 4.x](https://github.com/GodotSteam/GodotSteam/tree/godot4) | --- | [GDNative](https://github.com/GodotSteam/GodotSteam-Server/tree/gdnative) | [Server 3.x](https://github.com/GodotSteam/GodotSteam-Example-Project/tree/server3)
-[Multiplayer Peer](https://github.com/GodotSteam/MultiplayerPeer)| --- | [GDExtension](https://github.com/GodotSteam/GodotSteam-Server/tree/gdextension) | [Server 4.x](https://github.com/GodotSteam/GodotSteam-Example-Project/tree/server4)
-
+[Godot 2.x](https://github.com/GodotSteam/GodotSteam/tree/godot2) | [GDNative](https://github.com/GodotSteam/GodotSteam/tree/gdnative) | [Server 3.x](https://github.com/GodotSteam/GodotSteam-Server/tree/godot3) | [Skillet](https://github.com/GodotSteam/Skillet)
+[Godot 3.x](https://github.com/GodotSteam/GodotSteam/tree/godot3) | [GDExtension](https://github.com/GodotSteam/GodotSteam/tree/gdextension) | [Server 4.x](https://github.com/GodotSteam/GodotSteam-Server/tree/godot4) | ---
+[Godot 4.x](https://github.com/GodotSteam/GodotSteam/tree/godot4) | --- | [GDNative](https://github.com/GodotSteam/GodotSteam-Server/tree/gdnative) | ---
+[MultiplayerPeer](https://github.com/GodotSteam/MultiplayerPeer)| --- | [GDExtension](https://github.com/GodotSteam/GodotSteam-Server/tree/gdextension) | ---
 
 Documentation
 ---
@@ -18,28 +16,16 @@ Documentation
 
 Feel free to chat with us or ask questions on the [GodotSteam Discord server](https://discord.gg/SJRSq6K).
 
-
 Donate
 ---
-Pull-requests are the best way to help the project out but you can also donate through [Github Sponsors](https://github.com/sponsors/Gramps) or [Patreon](https://patreon.com/godotsteam)!
-
+Pull-requests are the best way to help the project out but you can also donate through [Github Sponsors](https://github.com/sponsors/Gramps)!
 
 Current Build
 ---
 You can [download pre-compiled versions of this repo here](https://github.com/GodotSteam/MultiplayerPeer/releases).
 
-**Version 4.11 Changes**
-- Changed: in-editor docs
-- Changed: reorganized code-base
-- Changed: more readable error for `sendPending`
-- Changed: removed \_scb from callback names are they are unnecessary due to class call
-- Changed: `lobby_chat_update` to just add or remove players
-- Changed: chat contants names changed
-- Fixed: missing argument hints for `lobby_data_update`
-- Fixed: `get_peer_info` overwriting various dictionary keys
-- Removed: string response to packet send failure, now returns actual error code
-- Removed: matchmaking enums, were not used; can be taken from GodotSteam directly if needed
-- Removed: `lobby_invite`, `lobby_match_list`, `lobby_kicked` as they are bound but not used in MP
+**Version 4.12 Changes**
+- Changed: version bump to match Godot 4.x branch update
 
 [You can read more change-logs here](https://godotsteam.com/changelog/multiplayer_peer/).
 
@@ -63,9 +49,9 @@ GodotSteam Version | Broken Compatibility
 Known Issues
 ---
 - Steam overlay will not work when running your game from the editor if you are using Forward+ as the renderer.  It does work with Compatibility though.  Your exported project will work perfectly fine in the Steam client, however.
-- When self-compiling, using MinGW will cause crashes unless you are using GodotSteam 4.10 or newer.
+- When self-compiling, **do not** use MinGW as it will cause crashes.
 
-"Quick" How-To
+Quick How-To
 ---
 For complete instructions on how to build the GodotSteam MultiplayerPeer from scratch, [please refer to our documentation's 'How-To Multiplayer Peer' section.](https://godotsteam.com/howto/multiplayer_peer/) It will have the most up-to-date information.
 

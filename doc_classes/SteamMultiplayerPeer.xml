@@ -4,7 +4,7 @@
 		Provides a bridge between Steam Networking Sockets and Godot's high level [MultiplayerAPI].
 	</brief_description>
 	<description>
-        A [MultiplayerPeer] implementation that connects Steam Networking Sockets to Godot's high level multiplayer API. Should be passed to [MultiplayerAPI].multiplayer_peer after being initialized by calling [code]create_lobby[/code] or [code]connect_lobby[/code].
+        A [MultiplayerPeer] implementation that connects Steam Networking to Godot's high level multiplayer API. Should be passed to [MultiplayerAPI].multiplayer_peer after being initialized by calling [code]create_lobby[/code] or [code]connect_lobby[/code].
 	</description>
 	<tutorials>
 		<link title="GodotSteam and SteamMultiplayerPeer - article by Michael Macha">https://michaelmacha.wordpress.com/2024/04/08/godotsteam-and-steammultiplayerpeer/</link>
