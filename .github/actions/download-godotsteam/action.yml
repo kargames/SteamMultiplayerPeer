@@ -12,6 +12,7 @@ runs:
       uses: actions/checkout@v4
       with:
         path: "godotsteam"
+        repository: GodotSteam/GodotSteam
         ref: "godot4"
 
     - name: Copy GodotSteam
