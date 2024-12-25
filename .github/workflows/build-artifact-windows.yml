@@ -100,6 +100,13 @@ jobs:
       - name: Setup Python and SCONS
         uses: ./.github/actions/setup-dependencies
 
+      # Apply ThorVG patch
+      - name: Apply ThorVG patch
+        shell: bash
+        run: |
+          mv -f ./.github/actions/helpers/tvgLock.h ./thirdparty/thorvg/src/common/
+          mv -f ./.github/actions/helpers/tvgTaskScheduler.h ./thirdparty/thorvg/src/renderer/
+
       # Compiling editor
       - name: ${{ matrix.bits }}-bit Editor Compilation
         uses: ./.github/actions/build-godot
