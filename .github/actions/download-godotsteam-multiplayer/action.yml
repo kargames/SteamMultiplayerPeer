@@ -17,4 +17,4 @@ runs:
     - name: Copy GodotSteam
       shell: bash
       run: |
-        cp -r godotsteammultiplayer ./modules/godotsteam_multiplayer
+        cp -r godotsteammultiplayer ./modules/godotsteam_multiplayer_peer
