@@ -47,7 +47,7 @@ GodotSteam Version | Broken Compatibility
 4.8 | Networking identity system removed, replaced with Steam IDs
 4.9 | sendMessages returns an Array
 4.11 | setLeaderboardDetailsMax removed
-4.12 | getItemDefinitionProperty return a dictionary, html_needs_paint key 'bgra' changed to 'rbga'
+4.13 | getItemDefinitionProperty return a dictionary, html_needs_paint key 'bgra' changed to 'rbga'
 
 Known Issues
 ---
