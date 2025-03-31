@@ -24,7 +24,7 @@ Current Build
 ---
 You can [download pre-compiled versions of this repo here](https://github.com/GodotSteam/MultiplayerPeer/releases).
 
-**Version 4.13 Changes**
+**Version 4.14 Changes**
 - Changed: version bump to match Godot 4.x branch update
 
 [You can read more change-logs here](https://godotsteam.com/changelog/multiplayer_peer/).
@@ -35,7 +35,8 @@ While rare, sometimes Steamworks SDK updates will break compatilibity with older
 
 Steamworks SDK Version | GodotSteam Version
 ---|---
-1.61 or newer | 4.12 or newer
+1.62 or newer | 4.14 or newer
+1.61 | 4.12 to 4.13
 1.60 | 4.6 to 4.11
 1.59 | 4.6 to 4.8
 1.58a or older | 4.5.4 or older
@@ -48,10 +49,11 @@ GodotSteam Version | Broken Compatibility
 4.9 | sendMessages returns an Array
 4.11 | setLeaderboardDetailsMax removed
 4.13 | getItemDefinitionProperty return a dictionary, html_needs_paint key 'bgra' changed to 'rbga'
+4.14 | Removed first argument for stat request in steamInit and steamInitEx, steamInit returns intended bool value
 
 Known Issues
 ---
-- Steam overlay will not work when running your game from the editor if you are using Forward+ as the renderer.  It does work with Compatibility though.  Your exported project will work perfectly fine in the Steam client, however.
+- Steam overlay may not work when running your game from the editor if you are using Forward+ as the renderer unless you use auto-initialization from the Project Settings menu.  Your exported project should work perfectly fine in the Steam client, however.
 - When self-compiling, **do not** use MinGW as it will cause crashes.
 
 Quick How-To

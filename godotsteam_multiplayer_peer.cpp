@@ -1,6 +1,29 @@
-///// HEADER INCLUDES
-/////////////////////////////////////////////////
+//===========================================================================//
+// GodotSteam MultiplayerPeer - godotsteam_multiplayer_peer.h
+//===========================================================================//
 //
+// Copyright (c) 2017-Current | Ryan Leverenz and Contributors
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+//===========================================================================//
+
 // Include GodotSteam header
 #include "godotsteam_multiplayer_peer.h"
 
@@ -8,9 +31,6 @@
 #include "core/io/json.h"
 
 
-///// DO IT
-/////////////////////////////////////////////////
-//
 SteamMultiplayerPeer::SteamMultiplayerPeer() :
 		callbackLobbyChatUpdate(this, &SteamMultiplayerPeer::lobby_chat_update),
 		callbackLobbyDataUpdate(this, &SteamMultiplayerPeer::lobby_data_update),
@@ -26,8 +46,7 @@ SteamMultiplayerPeer::SteamMultiplayerPeer() :
 
 
 ///// INTERNAL
-/////////////////////////////////////////////////
-//
+
 void SteamMultiplayerPeer::add_connection_peer(const CSteamID &this_steam_id, int this_peer_id) {
 	ERR_FAIL_COND_MSG(this_steam_id == SteamUser()->GetSteamID(), "Cannot add self as peer");
 
@@ -296,8 +315,7 @@ Dictionary SteamMultiplayerPeer::steam_id_to_dict(CSteamID input) {
 
 
 ///// FUNCTIONS
-/////////////////////////////////////////////////
-//
+
 Dictionary SteamMultiplayerPeer::collect_debug_data() {
 	auto output = Dictionary();
 
@@ -387,8 +405,7 @@ void SteamMultiplayerPeer::set_lobby_joinable(bool now_joinable){
 
 
 ///// PEER
-/////////////////////////////////////////////////
-//
+
 int SteamMultiplayerPeer::get_peer_id_from_steam64(uint64_t find_steam_id) {
 	if (find_steam_id == SteamUser()->GetSteamID().ConvertToUint64()) {
 		return this->unique_id;
@@ -430,8 +447,7 @@ uint64_t SteamMultiplayerPeer::get_steam64_from_peer_id(int peer) {
 
 
 ///// CALLBACKS / SIGNALS
-/////////////////////////////////////////////////
-//
+
 void SteamMultiplayerPeer::lobby_chat_update(LobbyChatUpdate_t *call_data) {
 	if (lobby_id != call_data->m_ulSteamIDLobby) {
 		return;
@@ -577,8 +593,7 @@ void SteamMultiplayerPeer::network_messages_session_failed(SteamNetworkingMessag
 
 
 ///// CALL RESULTS / SIGNALS
-/////////////////////////////////////////////////
-//	
+
 void SteamMultiplayerPeer::lobby_created(LobbyCreated_t *lobby_data, bool io_failure) {
 	if (io_failure) {
 		lobby_state = LobbyState::LOBBY_STATE_NOT_CONNECTED;
@@ -597,8 +612,7 @@ void SteamMultiplayerPeer::lobby_created(LobbyCreated_t *lobby_data, bool io_fai
 
 
 ///// BIND METHODS
-/////////////////////////////////////////////////
-//
+
 void SteamMultiplayerPeer::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("collect_debug_data"), &SteamMultiplayerPeer::collect_debug_data);
 	ClassDB::bind_method(D_METHOD("connect_lobby", "lobby_id"), &SteamMultiplayerPeer::join_lobby);
