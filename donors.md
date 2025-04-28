@@ -6,6 +6,7 @@ GodotSteam wouldn't keep growing without help from cool folks like these:
 
 ## Current Donors List
 
+- Aaronrmm
 - [Mauricio Castillo](https://bsky.app/profile/maurimo.dev)
 - [René Habermann](https://bippinbits.com/)
 - [PurpleMossCollectors](http://purplemosscollectors.com/)

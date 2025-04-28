@@ -12,12 +12,12 @@ on:
         description: 'Godot Github tag:'
         required: true
         type: string
-        default: '4.4-stable'
+        default: '4.4.1-stable'
       godotsteam_version:
         description: 'GodotSteam MP version:'
         required: true
         type: string
-        default: '4.14-mp'
+        default: '4.15-mp'
 
 
 jobs:
