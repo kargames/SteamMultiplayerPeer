@@ -24,7 +24,7 @@ Current Build
 ---
 You can [download pre-compiled versions of this repo here](https://github.com/GodotSteam/MultiplayerPeer/releases).
 
-**Version 4.14 Changes**
+**Version 4.15 Changes**
 - Changed: version bump to match Godot 4.x branch update
 
 [You can read more change-logs here](https://godotsteam.com/changelog/multiplayer_peer/).
