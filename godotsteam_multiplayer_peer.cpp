@@ -474,6 +474,13 @@ void SteamMultiplayerPeer::lobby_data_update(LobbyDataUpdate_t *call_data) {
 void SteamMultiplayerPeer::lobby_joined(LobbyEnter_t *lobbyData) {
 	ERR_FAIL_COND_MSG(lobbyData->m_ulSteamIDLobby != this->lobby_id.ConvertToUint64(), "Joined a lobby that is not this lobby");
 
+	uint64_t lobby_id_value = lobbyData->m_ulSteamIDLobby;
+	uint32_t permissions = lobbyData->m_rgfChatPermissions;
+	bool locked = lobbyData->m_bLocked;
+	uint32_t response = lobbyData->m_EChatRoomEnterResponse;
+
+	emit_signal("lobby_joined", lobby_id_value, permissions, locked, response);
+
 	if (lobbyData->m_EChatRoomEnterResponse == k_EChatRoomEnterResponseSuccess) {
 		lobby_owner = SteamMatchmaking()->GetLobbyOwner(lobby_id);
 		if (unique_id == 1) {
