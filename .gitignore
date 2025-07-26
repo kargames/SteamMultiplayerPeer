@@ -6,6 +6,10 @@
 export.cfg
 export_presets.cfg
 
+# Python generated
+__pycache__/
+*.pyc
+
 # Imported translations (automatically generated from CSV files)
 *.translation
 
