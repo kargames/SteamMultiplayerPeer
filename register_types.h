@@ -2,7 +2,7 @@
 // GodotSteam MultiplayerPeer - register_types.h
 //===========================================================================//
 //
-// Copyright (c) 2017-Current | Ryan Leverenz and Contributors
+// Copyright (c) 2017-Current | Chris Ridenour and Contributors
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -11,8 +11,8 @@
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
 //
-// The above copyright notice and this permission notice shall be included in all
-// copies or substantial portions of the Software.
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -27,12 +27,11 @@
 #ifndef GODOTSTEAMMULTIPLAYER_REGISTER_TYPES_H
 #define GODOTSTEAMMULTIPLAYER_REGISTER_TYPES_H
 
-
 #include "modules/register_module_types.h"
 
-
-void initialize_godotsteam_multiplayer_peer_module(ModuleInitializationLevel level);
-void uninitialize_godotsteam_multiplayer_peer_module(ModuleInitializationLevel level);
-
+void initialize_godotsteam_multiplayer_peer_module(
+    ModuleInitializationLevel level);
+void uninitialize_godotsteam_multiplayer_peer_module(
+    ModuleInitializationLevel level);
 
 #endif
