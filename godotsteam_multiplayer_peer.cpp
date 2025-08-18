@@ -63,11 +63,19 @@ int SteamMultiplayerPeer::get_packet_channel() const {
 }
 
 void SteamMultiplayerPeer::disconnect_peer(int p_peer_id, bool p_force) {
+  // Let godot know our peer disconnected and erase from our maps
   if (peers.has(p_peer_id)) {
     peers[p_peer_id]->disconnect_peer(p_force);
-    steam_connections.erase(peers[p_peer_id]->get_connection_handle());
-    peers.erase(p_peer_id);
     emit_signal(SNAME("peer_disconnected"), p_peer_id);
+    steam_connections.erase(peers[p_peer_id]->get_connection_handle());
+  }
+
+  // Clean up our local state
+  peers.erase(p_peer_id);
+
+  // Close if this was the host we lost
+  if (p_peer_id == 1 && connection_status != CONNECTION_DISCONNECTED) {
+    close();
   }
 }
 
@@ -120,7 +128,6 @@ void SteamMultiplayerPeer::network_connection_status_changed(
   switch (p_status_change->m_info.m_eState) {
     // Do nothing
   case k_ESteamNetworkingConnectionState_None:
-    break;
   case k_ESteamNetworkingConnectionState_ClosedByPeer:
   case k_ESteamNetworkingConnectionState_ProblemDetectedLocally: {
     if (unlikely(debug_level > DEBUG_LEVEL_NONE)) {
@@ -131,17 +138,9 @@ void SteamMultiplayerPeer::network_connection_status_changed(
     // Determine if we were previously connected
     if (p_status_change->m_eOldState ==
         k_ESteamNetworkingConnectionState_Connected) {
-
-      // Let godot know our peer disconnected and erase from our map
-      // We don't use disconnect_peer as this is a safer way to clean up weird
-      // invalid connections that never finished
       uint32_t connection_peer_id = p_status_change->m_info.m_nUserData;
-      if (peers.has(connection_peer_id)) {
-        emit_signal(SNAME("peer_disconnected"), connection_peer_id);
-      }
-
-      // Clean up our local state
-      peers.erase(connection_peer_id);
+      disconnect_peer(connection_peer_id, true);
+      // Erase directly from the status_change in case it was a lingering connection.
       steam_connections.erase(p_status_change->m_hConn);
     }
 
@@ -149,6 +148,17 @@ void SteamMultiplayerPeer::network_connection_status_changed(
     // closed on the other end
     SteamNetworkingSockets()->CloseConnection(p_status_change->m_hConn, 0,
                                               nullptr, false);
+
+    // If we were the client, attempt to reconnect
+    if (p_status_change->m_eOldState == k_ESteamNetworkingConnectionState_Connecting 
+      && p_status_change->m_info.m_eEndReason == k_ESteamNetConnectionEnd_Remote_BadCert 
+      && connection_retries < 5) {
+        if (unlikely(debug_level > DEBUG_LEVEL_NONE)) {
+          WARN_PRINT("Attempting to reconnect after bad cert.");
+        }
+      add_peer(p_status_change->m_info.m_identityRemote.GetSteamID64());
+      connection_retries++;
+    }
     break;
   }
   // A new incoming connection we should handle
@@ -207,6 +217,7 @@ void SteamMultiplayerPeer::network_connection_status_changed(
   }
   case k_ESteamNetworkingConnectionState_Connected: {
     // Someone has finished connecting to us
+    connection_retries = 0;
     if (unlikely(debug_level > DEBUG_LEVEL_NONE)) {
       WARN_PRINT(vformat(
           "Attempting to send peer ID to %ud",
@@ -436,6 +447,7 @@ Error SteamMultiplayerPeer::create_client(uint64_t p_host_steam_id,
                   ERR_ALREADY_IN_USE);
 
   server = false;
+  connection_retries = 0;
   unique_id = generate_unique_id();
 
   // We create a listen socket in all cases as we need to handle true P2P

@@ -52,6 +52,7 @@ private:
   int unique_id = 0;
   ConnectionStatus connection_status = CONNECTION_DISCONNECTED;
   bool server = false;
+  int connection_retries = 0;
 
   bool no_nagle = false;
   bool no_delay = false;
