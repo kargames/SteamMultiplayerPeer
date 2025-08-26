@@ -281,6 +281,8 @@ void SteamMultiplayerPeer::lobby_chat_update(LobbyChatUpdate_t *p_chat_update) {
     add_peer(p_chat_update->m_ulSteamIDUserChanged);
   } else {
     // If they didn't enter, it doesn't matter why, they are leaving
+    // Collect connections to remove to avoid iterator invalidation
+    LocalVector<HSteamNetConnection> connections_to_remove;
     for (KeyValue<HSteamNetConnection, Ref<SteamPacketPeer>> &E :
          steam_connections) {
       if (E.value->get_steam_id() == p_chat_update->m_ulSteamIDUserChanged) {
@@ -289,9 +291,13 @@ void SteamMultiplayerPeer::lobby_chat_update(LobbyChatUpdate_t *p_chat_update) {
         } else {
           // We have an open connection but no peer
           E.value->disconnect_peer(true);
-          steam_connections.erase(E.value->get_connection_handle());
+          connections_to_remove.push_back(E.value->get_connection_handle());
         }
       }
+    }
+    // Remove collected connections outside the iteration
+    for (HSteamNetConnection conn : connections_to_remove) {
+      steam_connections.erase(conn);
     }
   }
 }
